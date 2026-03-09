@@ -4,19 +4,21 @@ on:
   push:
     branches: ["main"]
 
+permissions:
+  contents: write
+
 jobs:
 
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Instalar HTMLHint
         run: npm install -g htmlhint
 
-      - name: Rodar Linter HTML
+      - name: Rodar Linter
         run: htmlhint "**/*.html"
 
 
@@ -25,8 +27,7 @@ jobs:
     needs: test
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Criar pasta dist
         run: |
